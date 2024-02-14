@@ -1,0 +1,22 @@
+.container{
+  margin: auto;
+  width: 80%;
+  display: flex;
+}
+.left{  border: 2px solid red;
+
+  height: auto;
+  width: 50%;
+}
+.btn_div{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 2px solid red;
+}
+
+.right{  border: 2px solid red;
+
+  height: auto;
+  width: 50%;
+}

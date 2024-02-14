@@ -1,0 +1,14 @@
+.container{
+  width: 60%;
+  margin: auto;
+}
+
+.title{
+  font-weight: 800;
+  font-size: 40px;
+}
+.para{
+  font-weight: 600;
+  font-size: 12px;
+  color: rgb(57, 56, 56);
+}

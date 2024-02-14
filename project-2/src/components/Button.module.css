@@ -1,0 +1,32 @@
+.primary_btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  padding: 18px;
+  background: #1f1f1f;
+  color: white;
+  min-width: 150px;
+  font-size: larger;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}
+
+.secondary_btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 2px solid black;
+  padding: 18px;
+  background: #ffffff;
+  width: auto;
+  font-size: larger;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}

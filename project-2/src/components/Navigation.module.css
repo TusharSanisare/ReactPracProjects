@@ -1,0 +1,15 @@
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+.navList{
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.navLink{
+  text-decoration: none;
+  color: black;
+}
