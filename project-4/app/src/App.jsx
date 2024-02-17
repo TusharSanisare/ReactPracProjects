@@ -5,11 +5,13 @@ import Search from "./components/Search";
 import Button from "./components/Button";
 import FoodContainer from "./components/FoodContainer";
 
-const BASE_URL = "http://localhost:9000";
+export const BASE_URL = "http://localhost:9000";
 const App = () => {
+  const [filterData, setFilterData] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedBtn, setSelectedBtn] = useState("all");
 
   useEffect(() => {
     const fetchFoodData = async () => {
@@ -18,6 +20,7 @@ const App = () => {
         const response = await fetch(BASE_URL);
         const json = await response.json();
         setData(json);
+        setFilterData(json);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -26,30 +29,32 @@ const App = () => {
     };
     fetchFoodData();
   }, []);
-  console.log(data);
 
-  const temp = {
-    image: "/images/egg.png",
-    name: "Boilded Egg",
-    price: 10,
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-    type: "breakfast",
+  const searchFood = (event) => {
+    const searchValue = event.target.value;
+    if (searchValue === "") {
+      setFilterData(null);
+    }
+    const filter = data?.filter((food) =>
+      food.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilterData(filter);
   };
 
-  if (error) {
-    return (
-      <>
-        <div className="">Error Agaya</div>
-      </>
+  const filterFood = (type) => {
+    console.log(type);
+    if (type === "All") {
+      setFilterData(data);
+      setSelectedBtn("All");
+      return;
+    }
+
+    const filter = data?.filter((food) =>
+      food.type.toLowerCase().includes(type.toLowerCase())
     );
-  }
-  if (loading) {
-    return (
-      <>
-        <div className="">Loading horiya hai</div>
-      </>
-    );
-  }
+    setFilterData(filter);
+    setSelectedBtn(type);
+  };
 
   return (
     <>
@@ -58,16 +63,20 @@ const App = () => {
           <div className="logo">
             <img src="/logo.svg" alt="" />
           </div>
-          <Search></Search>
+          <Search searchFood={searchFood}></Search>
         </TopContainer>
         <FilterBtnContainer>
-          <Button text="All" />
-          <Button text="Breakfast" />
-          <Button text="Lunch" />
-          <Button text="Dinner" />
+          <Button onClickHandle={filterFood} text="All" />
+          <Button onClickHandle={filterFood} text="Breakfast" />
+          <Button onClickHandle={filterFood} text="Lunch" />
+          <Button onClickHandle={filterFood} text="Dinner" />
         </FilterBtnContainer>
       </MainContainer>
-      {data != null ? <FoodContainer data={data}></FoodContainer> : "shutt"}
+      {filterData != null ? (
+        <FoodContainer data={filterData}></FoodContainer>
+      ) : (
+        "shutt"
+      )}
     </>
   );
 };
@@ -75,10 +84,10 @@ const App = () => {
 export default App;
 
 const MainContainer = styled.div`
-  height: 25vh;
+  height: 20vh;
   background-color: #0000008b;
-  /* border: 1px solid #ffffff20; */
-  padding: 30px;
+  border-bottom: 1px solid #ffffff38;
+  padding: 10px 30px;
 `;
 
 const TopContainer = styled.div`

@@ -14,7 +14,20 @@ const FoodContainer = ({ data }) => {
 export default FoodContainer;
 
 const FoodCartContainer = styled.div`
+  padding: 50px 0;
   overflow-y: scroll;
-  border: 2px solid red;
-  height: 75vh;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 70px;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

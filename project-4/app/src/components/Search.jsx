@@ -1,10 +1,16 @@
 import { FaSearch } from "react-icons/fa";
 import styled from "styled-components";
 import Button from "./Button";
-const Search = () => {
+const Search = ({ searchFood }) => {
   return (
     <SearchDiv>
-      <input type="text" name="search" id="search" placeholder="Enter Food" />
+      <input
+        onChange={searchFood}
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Enter Food"
+      />
       <Button text={<FaSearch />}></Button>
     </SearchDiv>
   );

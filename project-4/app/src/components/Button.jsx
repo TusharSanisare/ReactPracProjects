@@ -1,10 +1,10 @@
 import { FaSearch } from "react-icons/fa";
 import styled from "styled-components";
 
-const Button = ({ text }) => {
+const Button = ({ onClickHandle, text }) => {
   return (
     <>
-      <Btn>{text}</Btn>
+      <Btn onClick={() => onClickHandle(text)}>{text}</Btn>
     </>
   );
 };
