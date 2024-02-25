@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
+
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
+import ContactCart from "./components/ContactCart";
+import Model from "./components/Model";
+
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-import { LuClipboardEdit } from "react-icons/lu";
-import { AiFillDelete } from "react-icons/ai";
-import { PiUserCircleThin } from "react-icons/pi";
-
 const App = () => {
   const [contacts, setContacts] = useState([]);
+  const [isOpen, setOpen] = useState(false);
+
+  const onOpen = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     const getContacts = async () => {
@@ -33,21 +41,14 @@ const App = () => {
     <>
       <div className="h-lvh bg-gray-900">
         <Navbar></Navbar>
-        <SearchBar></SearchBar>
-        <div>
-          {contacts.map((contact) => (
-            <div
-              key={contact.id}
-              className="flex items-center w-96 m-auto p-3 rounded-md bg-orange-300"
-            >
-              <PiUserCircleThin className="text-4xl w-1/6 text-orange-600" />
-              <div className="w-1/2">{contact.name}</div>
-              <LuClipboardEdit className="text-2xl w-1/6" />
-              <AiFillDelete className="text-2xl w-1/6" />
-            </div>
-          ))}
-        </div>
+        <SearchBar handleOnAddBtn={onOpen}></SearchBar>
+        {contacts.map((contact) => (
+          <ContactCart key={contact.id} contact={contact}></ContactCart>
+        ))}
       </div>
+      <Model isOpen={isOpen} onClose={onClose}>
+        HI
+      </Model>
     </>
   );
 };
