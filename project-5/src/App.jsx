@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import ContactCart from "./components/ContactCart";
-import Model from "./components/Model";
+import AddUpdateContact from "./components/AddUpdateContact";
 
 import { db } from "./config/firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -45,10 +45,8 @@ const App = () => {
         {contacts.map((contact) => (
           <ContactCart key={contact.id} contact={contact}></ContactCart>
         ))}
+        <AddUpdateContact onClose={onClose} isOpen={isOpen} />
       </div>
-      <Model isOpen={isOpen} onClose={onClose}>
-        HI
-      </Model>
     </>
   );
 };
