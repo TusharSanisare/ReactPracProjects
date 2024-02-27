@@ -6,11 +6,16 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 import AddUpdateContact from "./AddUpdateContact";
+import useDisclouse from "../hooks/useDisclouse";
+import { toast } from "react-toastify";
 
 const ContactCart = ({ contact }) => {
+  const { onClose, onOpen, isOpen } = useDisclouse();
+
   const deleteContact = async (id) => {
     try {
       await deleteDoc(doc(db, "contacts", id));
+      toast.success("Contact Deleted Successfuly");
     } catch (e) {
       console.log(e);
     }
@@ -25,14 +30,22 @@ const ContactCart = ({ contact }) => {
           <p className="text-sm">{contact.email}</p>
         </div>
         <div className="absolute right-0 flex mx-2 gap-2 items-center">
-          <FaUserEdit className="text-3xl text-blue-700" />
+          <FaUserEdit
+            onClick={onOpen}
+            className="text-3xl cursor-pointer text-blue-700"
+          />
           <IoMdTrash
             onClick={() => deleteContact(contact.id)}
-            className="text-3xl text-red-600"
+            className="text-3xl text-red-600 cursor-pointer"
           />
         </div>
       </div>
-      <AddUpdateContact isOpen={isOpen} onClose={onClose} />
+      <AddUpdateContact
+        preContact={contact}
+        isupdate
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </>
   );
 };
