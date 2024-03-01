@@ -11,9 +11,11 @@ import {
   Icon,
   IconButton,
 } from "@chakra-ui/react";
+import { GrMenu } from "react-icons/gr";
+
 import { FaRegCircleUser } from "react-icons/fa6";
 
-const TopNav = () => {
+const TopNav = ({ title, onOpen }) => {
   return (
     <>
       <HStack
@@ -23,14 +25,24 @@ const TopNav = () => {
         py="20px"
         justify="space-between"
       >
-        <Heading fontSize="20px">Dashboard</Heading>
+        <Icon
+          as={GrMenu}
+          cursor="pointer"
+          fontSize="30px"
+          onClick={onOpen}
+          display={{
+            base: "block",
+            lg: "none",
+          }}
+        />
+        <Heading fontSize="20px">{title}</Heading>
         <Menu>
           <MenuButton>
             <Icon as={FaRegCircleUser} fontSize="30px" />
           </MenuButton>
           <MenuList>
-            <MenuItem>Download</MenuItem>
-            <MenuItem>Create a Copy</MenuItem>
+            <MenuItem>Logout</MenuItem>
+            <MenuItem>Support</MenuItem>
             <MenuItem>Mark as Draft</MenuItem>
             <MenuItem>Delete</MenuItem>
             <MenuItem>Attend a Workshop</MenuItem>

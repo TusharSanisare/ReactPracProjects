@@ -17,7 +17,15 @@ const Sidenav = () => {
     },
   ];
   return (
-    <Stack boxShadow="2xl" w="280px" h="100vh">
+    <Stack
+      boxShadow="2xl"
+      w="280px"
+      h="100vh"
+      display={{
+        base: "none",
+        lg: "flex",
+      }}
+    >
       <Heading as="h1" mx="auto" my="5">
         Free Time Pass
       </Heading>
